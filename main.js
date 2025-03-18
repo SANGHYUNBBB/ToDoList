@@ -26,8 +26,26 @@ function createItem(text) {
   itemRow.querySelector('.fa-pencil').addEventListener('click', () => {
     itemRow.innerHTML = `<input type="text" class="inputSmall" placeholder='수정할 문구'/>
     <i class="fa-solid fa-check small-fa"></i>`;
+    const $addBtnSmall = document.querySelector('.small-fa');
+    $addBtnSmall.addEventListener('click', () => {
+      //여기에 작성
+      const inputSmall = document.querySelector('.inputSmall');
+      const subtext = inputSmall.value.trim();
+      if (!subtext) {
+        inputSmall.value = '';
+        inputSmall.focus();
+        return;
+      }
+      items.appendChild(createItem(subtext));
+      inputSmall.value = '';
+      inputSmall.focus();
+      //여기에 작성
+      inputSmall.style.display = 'none';
+      itemRow.style.display = 'none';
+    });
   });
-  // 글자 하는거!!!! 마저 해라
+
+  // 여기 생각
   // itemRow.querySelector('.small-fa').addEventListener('click', () => {
   //   const inputSmall = document.querySelector('.inputSmall');
   //   const subtext = inputSmall.value.trim();
@@ -35,7 +53,7 @@ function createItem(text) {
   //     inputSmall.value = '';
   //     inputSmall.focus();
   //     return;
-  //   }
+  // }
   //   items.appendChild(createItem(subtext));
   //   inputSmall.value = '';
   //   inputSmall.focus();
@@ -54,10 +72,17 @@ function createItem(text) {
   requestAnimationFrame(() => itemRow.scrollIntoView({ block: 'center' }));
 
   return itemRow;
-
-  //   const itemRow = ' <li class= item></li>
-  //이렇게 생성하면 나중에 효과 안에 집어넣기 힘들다고
+  //
+  //
+  //if 로 addbtnsmall 클릭되면 실행되게끔!!!!
 }
+
+//
+//
+//
+
+//   const itemRow = ' <li class= item></li>
+//이렇게 생성하면 나중에 효과 안에 집어넣기 힘들다고
 
 function onAdd() {
   console.log('함수가 실행됐어!');
@@ -80,13 +105,19 @@ function onAdd() {
 }
 //이벤트 등록
 addBtn.addEventListener('click', onAdd);
+
 // input.addEventListener('keypress', (e) => {
 //   console.log(e);
 //   if (e.key === 'Enter') {
 //     onAdd();
 //   }
 // });
+// const $addBtnSmall = document.querySelector('.small-fa');
+// function onAddSmall() {
+//   console.log('작은 함수 실행');
+// }
 
+// $addBtnSmall.addEventListener('click', onAddSmall);
 //여기 못했어!!!!
 // function onAddSmall() {
 //   console.log('함수가 실행됐어!');
@@ -135,6 +166,7 @@ const westernSoup = [
   '비프스튜',
 ];
 input.addEventListener('keyup', (e) => e.key === 'Enter' && onAdd());
+//
 const $k_noodle = document.querySelector('.a_lb');
 const $k_meal = document.querySelector('.b_lb');
 const $k_soup = document.querySelector('.c_lb');
